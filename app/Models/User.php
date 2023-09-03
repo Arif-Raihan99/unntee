@@ -6,8 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+//use Symfony\Component\HttpKernel\Profiler\Profile;
+
 
 class User extends Authenticatable
 {
@@ -18,12 +21,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+//    protected static $profile;
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'account_role',
         'role',
+
+
     ];
 
     /**
@@ -59,5 +66,16 @@ class User extends Authenticatable
             $user->role = 2;
         }
         $user->save();
+
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $profile->save();
     }
+
+
+
+
+
+
+
 }

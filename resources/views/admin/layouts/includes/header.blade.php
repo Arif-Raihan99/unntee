@@ -3875,7 +3875,7 @@
                     </div>
                     <div class="separator my-2"></div>
                     <div class="menu-item px-5">
-                        <a href="" class="menu-link px-5">
+                        <a href="{{ route('edit-userProfile') }}" class="menu-link px-5">
                             My Profile
                         </a>
                     </div>
