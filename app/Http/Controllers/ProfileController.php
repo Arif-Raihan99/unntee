@@ -27,7 +27,7 @@ class ProfileController extends Controller
     {
 
         $request->validate([
-
+//            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'contact_number'    => 'required|string|max:255',
             'age'               => 'date',
             'gender'            => 'in:male,female,others',
@@ -45,6 +45,7 @@ class ProfileController extends Controller
 
          $profile = Profile::where('user_id' , Auth::id())->first();
 
+//        $profile->image = getImageUrl($request->file('image'), '/assets/assets/media/user/');
 
          $profile->contact_number = $request->contact_number;
          $profile->age = $request->age;
