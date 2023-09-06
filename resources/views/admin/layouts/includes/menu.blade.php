@@ -32,7 +32,7 @@
                 <a href="{{ route('expertises.index') }}">
                     <span class="menu-link">
                     <span class="menu-icon">
-                        <i class="ki-duotone ki-files-tablet fs-2">
+                        <i class="ki-duotone ki-courier-express fs-2">
                             <span class="path1"></span><span class="path2"></span>
                         </i>
                     </span>
@@ -666,6 +666,7 @@
 {{--                    </div><!--end:Menu item--></div><!--end:Menu sub--></div><!--end:Menu item-->--}}
 
 
+            @if(Auth::user()->role == 2)
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
                     <span class="menu-icon">
@@ -714,7 +715,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
         </div>
     </div>
 </div>
