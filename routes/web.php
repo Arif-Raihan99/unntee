@@ -4,7 +4,6 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExpertiseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +18,6 @@ use App\Http\Controllers\ExpertiseController;
 
 // Services
 Route::resource('services', ServiceController::class);
-
-
 
 
 Route::middleware('maintenance')->group(function (){

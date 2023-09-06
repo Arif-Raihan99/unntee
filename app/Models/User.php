@@ -58,12 +58,14 @@ class User extends Authenticatable
         $user->name         = $request->name;
         $user->email        = $request->email;
         $user->password     = Hash::make($request->password);
-        $user->account_role = $request->account_type;
+
         if (User::count() < 1){
-			$data = new SiteData();
+            $data = new SiteData();
             $data->save();
 
             $user->role = 2;
+        }else{
+            $user->account_role = $request->account_type;
         }
         $user->save();
 

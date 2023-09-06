@@ -75,10 +75,10 @@ class ExpertiseController extends Controller
     {
         $request->validate([
             'edit_name'       => ['required', 'min:4'],
-            'edit_from_month' => ['required_without:from_year', 'nullable', 'integer', 'between:1,11'],
-            'edit_from_year'  => ['required_without:from_month', 'nullable', 'string'],
-            'edit_to_month'   => ['required_without:to_year', 'nullable', 'integer', 'between:1,11'],
-            'edit_to_year'    => ['required_without:to_month', 'nullable', 'string'],
+            'edit_from_month' => ['required_without:edit_from_year', 'nullable', 'integer', 'between:1,11'],
+            'edit_from_year'  => ['required_without:edit_from_month', 'nullable', 'string'],
+            'edit_to_month'   => ['required_without:edit_to_year', 'nullable', 'integer', 'between:1,11'],
+            'edit_to_year'    => ['required_without:edit_to_month', 'nullable', 'string'],
         ]);
 
         $expertise->name = $request->edit_name;
@@ -97,8 +97,5 @@ class ExpertiseController extends Controller
         $expertise->delete();
         return redirect()->back()->with('success', 'Service delete successfully.');
     }
-
-
-
 
 }

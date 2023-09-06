@@ -11,6 +11,7 @@ class ProfileController extends Controller
 {
     // profile page
     public function profile($id=null){
+
         return view('admin.profile.profile',[
             'profile' =>  Profile::where('user_id', $id ? decrypt($id) : Auth::id())->first(),
         ]);
@@ -23,7 +24,6 @@ class ProfileController extends Controller
             'profile' =>  Profile::where('user_id',Auth::id())->first(),
         ]);
     }
-
 
     // update profile
     public function update(Request $request){
@@ -46,14 +46,14 @@ class ProfileController extends Controller
 
          $profile = Profile::where('user_id' , Auth::id())->first();
 
-         $profile->contact_number     = $request->contact_number;
-         $profile->age                = $request->age;
-         $profile->gender             = $request->gender;
-         $profile->location           = $request->location;
-         $profile->experiences        = $request->experience;
-         $profile->referable          = $request->referable;
-         $profile->cpr_certificate    = $request->cpr_certificate;
-         $profile->driving_licence    = $request->driving_license;
+         $profile->contact_number  = $request->contact_number;
+         $profile->age             = $request->age;
+         $profile->gender          = $request->gender;
+         $profile->location        = $request->location;
+         $profile->experiences     = $request->experience;
+         $profile->referable       = $request->referable;
+         $profile->cpr_certificate = $request->cpr_certificate;
+         $profile->driving_licence = $request->driving_license;
 
 //        $profile->image = getImageUrl($request->file('image'), '/assets/assets/media/user/');
 
