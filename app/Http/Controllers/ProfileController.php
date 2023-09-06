@@ -39,6 +39,9 @@ class ProfileController extends Controller
             'driving_license'   => ['nullable', 'file'],
             'verified_document' => ['nullable', 'string'],
             'star_ratting'      => ['nullable', 'numeric'],
+
+//            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+
         ]);
 
          $profile = Profile::where('user_id' , Auth::id())->first();
@@ -51,9 +54,8 @@ class ProfileController extends Controller
          $profile->referable          = $request->referable;
          $profile->cpr_certificate    = $request->cpr_certificate;
          $profile->driving_licence    = $request->driving_license;
-         $profile->verified_documents = $request->verified_documents;
-         $profile->star_ratting       = $request->star_ratting;
-         $profile->save();
+
+//        $profile->image = getImageUrl($request->file('image'), '/assets/assets/media/user/');
 
          return redirect()->back()->with('success','Profile update successfully.');
     }
