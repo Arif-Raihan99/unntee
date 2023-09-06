@@ -180,7 +180,7 @@
                                             <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span
                                                     class="path2"></span></i>
 
-                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+                                            <input type="file" name="image" accept=".png, .jpg, .jpeg"/>
                                             <input type="hidden" name="avatar_remove"/>
 
                                         </label>
