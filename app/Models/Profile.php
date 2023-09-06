@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
-
-
-
     protected $fillable = [
-        'age','gender','contact_number','job_complete','experiences','verified_documents','location','cpr_certificate',
-        'driving_licence','star_ratting','referable','work_status',
+        'age',
+        'gender',
+        'contact_number',
+        'job_complete',
+        'experiences',
+        'verified_documents',
+        'location',
+        'cpr_certificate',
+        'driving_licence',
+        'star_ratting',
+        'referable',
+        'work_status',
     ];
 
     public static function ProfileCreate($request)
@@ -37,5 +44,7 @@ class Profile extends Model
             $profile->save();
         }
     }
-
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
