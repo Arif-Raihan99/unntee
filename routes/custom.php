@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExpertiseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,12 @@ use App\Http\Controllers\ExpertiseController;
 */
 
 
-Route::get('/edit-userProfile',[ProfileController::class,'editUserProfile'])->name('edit-userProfile');
-Route::post('/update-userProfile',[ProfileController::class,'updateUserProfile'])->name('update-userProfile');
-/* Expertise Resource Controller*/
+Route::controller(ProfileController::class)->prefix('profile')->group(function (){
+    Route::get('/edit','edit')->name('profile.edit');
+    Route::get('/{id?}','profile')->name('profile');
+    Route::post('/update','update')->name('profile.update');
+});
+
 Route::resource('expertises', ExpertiseController::class);
 
 

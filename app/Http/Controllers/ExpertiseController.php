@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Expertise;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ExpertiseController extends Controller
 {
@@ -31,18 +32,17 @@ class ExpertiseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'      => ['required', 'max:100'],
-            'fromMonth' => ['required', 'integer', 'between:1,12'],
-            'fromYear'  => ['required', 'string'],
-            'toMonth'   => ['required', 'integer', 'between:1,12'],
-            'toYear'    => ['required', 'string'],
-
+            'name'       => ['required', 'min:4'],
+            'from_month' => ['required_without:from_year', 'nullable', 'integer', 'between:1,11'],
+            'from_year'  => ['required_without:from_month', 'nullable', 'string'],
+            'to_month'   => ['required_without:to_year', 'nullable', 'integer', 'between:1,11'],
+            'to_year'    => ['required_without:to_month', 'nullable', 'string'],
         ]);
 
-        $expertise          = new Expertise();
-        $expertise->name    = $request->name;
-        $expertise->from    =  json_encode(['month' => $request->fromMonth, 'year' => $request->fromYear]);
-        $expertise->to      =  json_encode(['month' => $request->toMonth, 'year' => $request->toYear]);
+        $expertise = new Expertise();
+        $expertise->name = $request->name;
+        $expertise->from =  json_encode(['month' => $request->from_month ?? 0, 'year' => $request->from_year ?? 0]);
+        $expertise->to   =  json_encode(['month' => $request->to_month ?? 0, 'year' => $request->to_year ?? 0]);
         $expertise->save();
 
         return redirect()->back()->with('success', 'Expertise added successfully.');
@@ -73,25 +73,20 @@ class ExpertiseController extends Controller
      */
     public function update(Request $request, Expertise $expertise)
     {
-
         $request->validate([
-            'edit_name'      => ['required', 'max:100'],
-            'edit_fromMonth' => ['required', 'integer', 'between:1,12'],
-            'edit_fromYear'  => ['required', 'string'],
-            'edit_toMonth'   => ['required', 'integer', 'between:1,12'],
-            'edit_toYear'    => ['required', 'string'],
-
+            'edit_name'       => ['required', 'min:4'],
+            'edit_from_month' => ['required_without:from_year', 'nullable', 'integer', 'between:1,11'],
+            'edit_from_year'  => ['required_without:from_month', 'nullable', 'string'],
+            'edit_to_month'   => ['required_without:to_year', 'nullable', 'integer', 'between:1,11'],
+            'edit_to_year'    => ['required_without:to_month', 'nullable', 'string'],
         ]);
 
-
-        $expertise->name    = $request->edit_name;
-        $expertise->from    =  json_encode(['month' => $request->edit_fromMonth, 'year' => $request->edit_fromYear]);
-        $expertise->to      =  json_encode(['month' => $request->edit_toMonth, 'year' => $request->edit_toYear]);
+        $expertise->name = $request->edit_name;
+        $expertise->from =  json_encode(['month' => $request->edit_from_month ?? 0, 'year' => $request->edit_from_year ?? 0 ]);
+        $expertise->to   =  json_encode(['month' => $request->edit_to_month ?? 0, 'year' => $request->edit_to_year ?? 0]);
         $expertise->save();
 
         return redirect()->back()->with('success', 'Expertise update successfully.');
-
-
     }
 
     /**

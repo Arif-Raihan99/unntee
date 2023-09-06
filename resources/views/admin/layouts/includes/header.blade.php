@@ -2330,6 +2330,8 @@
                     </div>
                 </div>
 
+                @if(Auth::user()->role == 2)
+
                 <!--begin:Catch Menu item-->
                 <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
                      class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
@@ -2352,6 +2354,7 @@
                             </span>
                         </a>
                     </div>
+                @endif
                 @endif
             </div>
         </div>
@@ -3875,9 +3878,7 @@
                     </div>
                     <div class="separator my-2"></div>
                     <div class="menu-item px-5">
-                        <a href="{{ route('edit-userProfile') }}" class="menu-link px-5">
-                            My Profile
-                        </a>
+                        <a href="{{ route('profile') }}" class="menu-link px-5">My Profile</a>
                     </div>
                     <div class="menu-item px-5">
                         <a href="" class="menu-link px-5">

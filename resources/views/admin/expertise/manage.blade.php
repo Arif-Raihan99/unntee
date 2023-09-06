@@ -14,7 +14,7 @@
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0 mb-3">
                     Manage Expertise
                 </h1>
-                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-3">
                     <li class="breadcrumb-item text-muted">
                         <a href="{{ route('dashboard') }}" class="text-muted text-hover-primary">Dashboard</a>
                     </li>
@@ -56,7 +56,7 @@
                     <div class="card-toolbar">
                         <a class="btn btn-primary" id="add_service_button" data-bs-toggle="modal"
                            data-bs-target="#kt_modal_new_address">
-                            Add Service
+                            Add Expertise
                         </a>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
 @endsection
 
 @section('modal')
-    <!--begin::Modal - Add Service-->
+    <!--begin::Modal - Add Expertise-->
     <div class="modal fade" id="kt_modal_new_address" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
@@ -184,89 +184,63 @@
                                 @enderror
                             </div>
                             <!--begin::Input Form group-->
-                            <div class="row mb-5">
+                            <div class="row mb-7">
                                 <label for="from" class="required fs-5 fw-semibold mb-2">From</label>
 
                                 <div class="col-6 fv-row">
                                     <label for="fromYear" class=" fs-5 fw-semibold mb-2">Select Year:</label>
-                                    <select id="fromYear" name="fromYear" class="form-select">
-                                        <option value="" selected><-- Select Year --></option>
-                                        <option value="1" {{ (old('fromYear') == '1' ? 'selected' : '') }} >1 years</option>
-                                        <option value="2" {{ (old('fromYear') == '2' ? 'selected' : '') }} >2 years</option>
-                                        <option value="3" {{ (old('fromYear') == '3' ? 'selected' : '') }} >3 years</option>
-                                        <option value="4" {{ (old('fromYear') == '4' ? 'selected' : '') }} >4 years</option>
-                                        <option value="5" {{ (old('fromYear') == '5' ? 'selected' : '') }} >5 years</option>
-                                        <option value="6" {{ (old('fromYear') == '6' ? 'selected' : '') }} >6 years</option>
-                                        <option value="7" {{ (old('fromYear') == '7' ? 'selected' : '') }} >7 years</option>
-                                        <option value="8" {{ (old('fromYear') == '8' ? 'selected' : '') }} >8 years</option>
-                                        <option value="8+"{{ (old('fromYear') == '8+' ? 'selected' : '') }} >8+ years</option>
+                                    <select id="fromYear" name="from_year" class="form-select">
+                                        <option value="" selected disabled class="text-center">Select Year</option>
+                                        @for($i=1; $i<9; $i++)
+                                            <option value="{{ $i }}" {{ (old('from_year') == $i  ? 'selected' : '') }} >{{ $i }} years</option>
+                                        @endfor
+                                        <option value="8+"{{ (old('from_year') == '8+' ? 'selected' : '') }} >8+ years</option>
                                     </select>
-                                    @error('fromYear')
+                                    @error('from_year')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-6 fv-row">
                                     <label for="fromMonth" class=" fs-5 fw-semibold mb-2">Select Month:</label>
-                                    <select id="fromMonth" name="fromMonth" class="form-select">
-                                        <option value="" selected><-- Select Month --></option>
-                                        <option value="1" {{ (old('fromMonth') == '1' ? 'selected' : '') }} >1 Month</option>
-                                        <option value="2" {{ (old('fromMonth') == '2' ? 'selected' : '') }} >2 Month</option>
-                                        <option value="3" {{ (old('fromMonth') == '3' ? 'selected' : '') }} >3 Month</option>
-                                        <option value="4" {{ (old('fromMonth') == '4' ? 'selected' : '') }} >4 Month</option>
-                                        <option value="5" {{ (old('fromMonth') == '5' ? 'selected' : '') }} >5 Month</option>
-                                        <option value="6" {{ (old('fromMonth') == '6' ? 'selected' : '') }} >6 Month</option>
-                                        <option value="7" {{ (old('fromMonth') == '7' ? 'selected' : '') }} >7 Month</option>
-                                        <option value="8" {{ (old('fromMonth') == '8' ? 'selected' : '') }} >8 Month</option>
-                                        <option value="9" {{ (old('fromMonth') == '9' ? 'selected' : '') }} >9 Month</option>
-                                        <option value="10" {{ (old('fromMonth') == '10' ? 'selected' : '') }} >10 Month</option>
-                                        <option value="11" {{ (old('fromMonth') == '11' ? 'selected' : '') }}>11 Month</option>
+                                    <select id="fromMonth" name="from_month" class="form-select">
+                                        <option selected value="" disabled class="text-center">Select Month</option>
+                                        @for($i=1; $i<12; $i++)
+                                            <option value="{{ $i }}" {{ (old('from_month') == $i ? 'selected' : '') }} >{{ $i}} Month</option>
+                                        @endfor
                                     </select>
-                                    @error('fromMonth')
+                                    @error('from_month')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                             </div>
+
                             <!--begin::Input To group-->
                             <div class="row mb-5">
                                 <label for="from" class="required fs-5 fw-semibold mb-2">To</label>
                                 <div class="col-6 fv-row">
                                     <label for="toYear" class=" fs-5 fw-semibold mb-2">Select Year:</label>
-                                    <select id="toYear" name="toYear" class="form-select">
-                                        <option value="" selected><-- Select Year --></option>
-                                        <option value="1" {{ (old('toYear') == '1' ? 'selected' : '') }} >1 years</option>
-                                        <option value="2" {{ (old('toYear') == '2' ? 'selected' : '') }} >2 years</option>
-                                        <option value="3" {{ (old('toYear') == '3' ? 'selected' : '') }} >3 years</option>
-                                        <option value="4" {{ (old('toYear') == '4' ? 'selected' : '') }} >4 years</option>
-                                        <option value="5" {{ (old('toYear') == '5' ? 'selected' : '') }} >5 years</option>
-                                        <option value="6" {{ (old('toYear') == '6' ? 'selected' : '') }} >6 years</option>
-                                        <option value="7" {{ (old('toYear') == '7' ? 'selected' : '') }} >7 years</option>
-                                        <option value="8" {{ (old('toYear') == '8' ? 'selected' : '') }} >8 years</option>
-                                        <option value="8+"{{ (old('toYear') == '8+' ? 'selected' : '') }} >8+ years</option>
+                                    <select id="toYear" name="to_year" class="form-select">
+                                        <option value=""  disabled selected class="text-center">Select Year</option>
+                                        @for($i=1; $i<9; $i++)
+                                            <option value="{{ $i }}" {{ (old('to_year') == $i ? 'selected' : '') }} >{{ $i }} years</option>
+                                        @endfor
+                                        <option value="8+"{{ (old('to_year') == '8+' ? 'selected' : '') }} >8+ years</option>
                                     </select>
-                                    @error('toYear')
+                                    @error('to_year')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-6 fv-row">
                                     <label for="toMonth" class=" fs-5 fw-semibold mb-2">Select Month:</label>
-                                    <select id="toMonth" name="toMonth" class="form-select">
-                                        <option value="" selected><-- Select Month --></option>
-                                        <option value="1" {{ (old('toMonth') == '1' ? 'selected' : '') }} >1 Month</option>
-                                        <option value="2" {{ (old('toMonth') == '2' ? 'selected' : '') }} >2 Month</option>
-                                        <option value="3" {{ (old('toMonth') == '3' ? 'selected' : '') }} >3 Month</option>
-                                        <option value="4" {{ (old('toMonth') == '4' ? 'selected' : '') }} >4 Month</option>
-                                        <option value="5" {{ (old('toMonth') == '5' ? 'selected' : '') }} >5 Month</option>
-                                        <option value="6" {{ (old('toMonth') == '6' ? 'selected' : '') }} >6 Month</option>
-                                        <option value="7" {{ (old('toMonth') == '7' ? 'selected' : '') }} >7 Month</option>
-                                        <option value="8" {{ (old('toMonth') == '8' ? 'selected' : '') }} >8 Month</option>
-                                        <option value="9" {{ (old('toMonth') == '9' ? 'selected' : '') }} >9 Month</option>
-                                        <option value="10" {{ (old('toMonth') == '10' ? 'selected' : '') }} >10 Month</option>
-                                        <option value="11" {{ (old('toMonth') == '11' ? 'selected' : '') }}>11 Month</option>
+                                    <select id="toMonth" name="to_month" class="form-select">
+                                        <option selected value="" disabled class="text-center">Select Month</option>
+                                        @for($i=1; $i<12; $i++)
+                                            <option value="{{ $i }}" {{ (old('to_month') == $i ? 'selected' : '') }} >{{ $i }} Month</option>
+                                        @endfor
                                     </select>
-                                    @error('toMonth')
+                                    @error('to_month')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -290,7 +264,7 @@
         </div>
     </div>
 
-    <!--begin::Modal - Edit Service-->
+    <!--begin::Modal - Edit Expertise-->
     <div class="modal fade" id="kt_modal_new_address_edit" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
@@ -324,46 +298,33 @@
                                 <div class="text-danger mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
+
                             <!--begin::Input Form group-->
                             <div class="row mb-5">
                                 <label for="from" class="required fs-5 fw-semibold mb-2">From</label>
-
                                 <div class="col-6 fv-row">
-                                    <label for="fromYear" class=" fs-5 fw-semibold mb-2">Select Year:</label>
-                                    <select id="edit_fromYear" name="edit_fromYear" class="form-select">
-                                        <option value="" selected><-- Select Year --></option>
-                                        <option value="1" {{ (old('edit_fromYear') == '1' ? 'selected' : '') }} >1 years</option>
-                                        <option value="2" {{ (old('edit_fromYear') == '2' ? 'selected' : '') }} >2 years</option>
-                                        <option value="3" {{ (old('edit_fromYear') == '3' ? 'selected' : '') }} >3 years</option>
-                                        <option value="4" {{ (old('edit_fromYear') == '4' ? 'selected' : '') }} >4 years</option>
-                                        <option value="5" {{ (old('edit_fromYear') == '5' ? 'selected' : '') }} >5 years</option>
-                                        <option value="6" {{ (old('edit_fromYear') == '6' ? 'selected' : '') }} >6 years</option>
-                                        <option value="7" {{ (old('edit_fromYear') == '7' ? 'selected' : '') }} >7 years</option>
-                                        <option value="8" {{ (old('edit_fromYear') == '8' ? 'selected' : '') }} >8 years</option>
-                                        <option value="8+"{{ (old('edit_fromYear') == '8+' ? 'selected' : '') }} >8+ years</option>
+                                    <label for="edit_fromYear" class=" fs-5 fw-semibold mb-2">Select Year:</label>
+                                    <select id="edit_fromYear" name="edit_from_year" class="form-select">
+                                        <option value="" class="text-center" selected disabled>Select Year</option>
+                                        @for($i=1; $i<9; $i++)
+                                            <option value="{{ $i }}" {{ (old('edit_from_year') == $i  ? 'selected' : '') }} >{{ $i }} years</option>
+                                        @endfor
+                                        <option value="8+" {{ (old('edit_from_year') == '8+' ? 'selected' : '') }} >8+ years</option>
                                     </select>
-                                    @error('edit_fromYear')
+                                    @error('edit_from_year')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-6 fv-row">
-                                    <label for="fromMonth" class=" fs-5 fw-semibold mb-2">Select Month:</label>
-                                    <select id="edit_fromMonth" name="edit_fromMonth" class="form-select">
-                                        <option value="" selected><-- Select Month --></option>
-                                        <option value="1" {{ (old('edit_fromMonth') == '1' ? 'selected' : '') }} >1 Month</option>
-                                        <option value="2" {{ (old('edit_fromMonth') == '2' ? 'selected' : '') }} >2 Month</option>
-                                        <option value="3" {{ (old('edit_fromMonth') == '3' ? 'selected' : '') }} >3 Month</option>
-                                        <option value="4" {{ (old('edit_fromMonth') == '4' ? 'selected' : '') }} >4 Month</option>
-                                        <option value="5" {{ (old('edit_fromMonth') == '5' ? 'selected' : '') }} >5 Month</option>
-                                        <option value="6" {{ (old('edit_fromMonth') == '6' ? 'selected' : '') }} >6 Month</option>
-                                        <option value="7" {{ (old('edit_fromMonth') == '7' ? 'selected' : '') }} >7 Month</option>
-                                        <option value="8" {{ (old('edit_fromMonth') == '8' ? 'selected' : '') }} >8 Month</option>
-                                        <option value="9" {{ (old('edit_fromMonth') == '9' ? 'selected' : '') }} >9 Month</option>
-                                        <option value="10" {{ (old('edit_fromMonth') == '10' ? 'selected' : '') }} >10 Month</option>
-                                        <option value="11" {{ (old('edit_fromMonth') == '11' ? 'selected' : '') }}>11 Month</option>
+                                    <label for="edit_fromMonth" class=" fs-5 fw-semibold mb-2">Select Month:</label>
+                                    <select id="edit_fromMonth" name="edit_from_month" class="form-select">
+                                        <option value="" disabled selected class="text-center">Select Month</option>
+                                        @for($i=1; $i<12; $i++)
+                                            <option value="{{ $i }}" {{ old('edit_from_month') == $i ? 'selected' : '' }} >{{ $i }} Month</option>
+                                        @endfor
                                     </select>
-                                    @error('edit_fromMonth')
+                                    @error('edit_from_month')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -373,47 +334,32 @@
                             <div class="row mb-5">
                                 <label for="from" class="required fs-5 fw-semibold mb-2">To</label>
                                 <div class="col-6 fv-row">
-                                    <label for="toYear" class=" fs-5 fw-semibold mb-2">Select Year:</label>
-                                    <select id="edit_toYear" name="edit_toYear" class="form-select">
-                                        <option value="" selected><-- Select Year --></option>
-                                        <option value="1" {{ (old('edit_toYear') == '1' ? 'selected' : '') }} >1 years</option>
-                                        <option value="2" {{ (old('edit_toYear') == '2' ? 'selected' : '') }} >2 years</option>
-                                        <option value="3" {{ (old('edit_toYear') == '3' ? 'selected' : '') }} >3 years</option>
-                                        <option value="4" {{ (old('edit_toYear') == '4' ? 'selected' : '') }} >4 years</option>
-                                        <option value="5" {{ (old('edit_toYear') == '5' ? 'selected' : '') }} >5 years</option>
-                                        <option value="6" {{ (old('edit_toYear') == '6' ? 'selected' : '') }} >6 years</option>
-                                        <option value="7" {{ (old('edit_toYear') == '7' ? 'selected' : '') }} >7 years</option>
-                                        <option value="8" {{ (old('edit_toYear') == '8' ? 'selected' : '') }} >8 years</option>
-                                        <option value="8+"{{ (old('edit_toYear') == '8+' ? 'selected' : '') }} >8+ years</option>
+                                    <label for="edit_toYear" class=" fs-5 fw-semibold mb-2">Select Year:</label>
+                                    <select id="edit_toYear" name="edit_to_year" class="form-select">
+                                        <option value="" disabled selected class="text-center">Select Year</option>
+                                        @for($i=1; $i<9; $i++)
+                                            <option value="{{ $i }}" {{ (old('edit_to_year') == $i ? 'selected' : '') }} >{{ $i }} years</option>
+                                        @endfor
+                                        <option value="8+" {{ (old('edit_to_year') == '8+' ? 'selected' : '') }} >8+ years</option>
                                     </select>
-                                    @error('edit_toYear')
+                                    @error('edit_to_year')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-6 fv-row">
-                                    <label for="toMonth" class=" fs-5 fw-semibold mb-2">Select Month:</label>
-                                    <select id="edit_toMonth" name="edit_toMonth" class="form-select">
-                                        <option value="" selected><-- Select Month --></option>
-                                        <option value="1" {{ (old('edit_toMonth') == '1' ? 'selected' : '') }} >1 Month</option>
-                                        <option value="2" {{ (old('edit_toMonth') == '2' ? 'selected' : '') }} >2 Month</option>
-                                        <option value="3" {{ (old('edit_toMonth') == '3' ? 'selected' : '') }} >3 Month</option>
-                                        <option value="4" {{ (old('edit_toMonth') == '4' ? 'selected' : '') }} >4 Month</option>
-                                        <option value="5" {{ (old('edit_toMonth') == '5' ? 'selected' : '') }} >5 Month</option>
-                                        <option value="6" {{ (old('edit_toMonth') == '6' ? 'selected' : '') }} >6 Month</option>
-                                        <option value="7" {{ (old('edit_toMonth') == '7' ? 'selected' : '') }} >7 Month</option>
-                                        <option value="8" {{ (old('edit_toMonth') == '8' ? 'selected' : '') }} >8 Month</option>
-                                        <option value="9" {{ (old('edit_toMonth') == '9' ? 'selected' : '') }} >9 Month</option>
-                                        <option value="10" {{ (old('edit_toMonth') == '10' ? 'selected' : '') }} >10 Month</option>
-                                        <option value="11" {{ (old('edit_toMonth') == '11' ? 'selected' : '') }}>11 Month</option>
+                                    <label for="edit_toMonth" class=" fs-5 fw-semibold mb-2">Select Month:</label>
+                                    <select id="edit_toMonth" name="edit_to_month" class="form-select">
+                                        <option value="" disabled selected class="text-center">Select Month</option>
+                                        @for($i=1; $i<12; $i++)
+                                            <option value="{{ $i }}" {{ old('edit_to_month') == $i ? 'selected' : '' }} >{{ $i }} Month</option>
+                                        @endfor
                                     </select>
-                                    @error('edit_toMonth')
+                                    @error('edit_to_month')
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
 
@@ -433,32 +379,28 @@
 @endsection
 
 @section('js')
-    @error('name')
+    @if($errors->first('name') or $errors->first('to_year') or $errors->first('to_month') or $errors->first('from_year') or $errors->first('from_month'))
     <script>
         document.querySelector('#add_service_button').click();
     </script>
-    @enderror
-    @error('edit_name')
+    @endif
+
+    @if($errors->first('edit_name') or $errors->first('edit_to_year') or $errors->first('edit_to_month') or $errors->first('edit_from_year') or $errors->first('edit_from_month'))
     <script>
         document.querySelector('#edit_service_button').click();
-        document.querySelector("[name='edit_name']").value = "{{ $errors->first('edit_name') }}";
-        document.querySelector("[name='edit_fromYear']").value = "{{ $errors->first('edit_fromYear') }}";
-        document.querySelector("[name='edit_fromMonth']").value = "{{ $errors->first('edit_fromMonth') }}";
-        document.querySelector("[name='edit_toYear']").value = "{{ $errors->first('edit_toYear') }}";
-        document.querySelector("[name='edit_toMonth']").value = "{{ $errors->first('edit_toMonth') }}";
     </script>
-    @enderror
+    @endif
 
     <script>
 
         function pushTypeOnEditModal(item){
             document.querySelector('#edit_modal').parentElement.action = '/expertises/' + item.id;
-            document.querySelector("[name='edit_name']").value = item.name;
 
-            document.querySelector("[name='edit_fromYear']").value = JSON.parse(item.from).year;
-            document.querySelector("[name='edit_fromMonth']").value = JSON.parse(item.from).month;
-            document.querySelector("[name='edit_toYear']").value = JSON.parse(item.to).year;
-            document.querySelector("[name='edit_toMonth']").value = JSON.parse(item.to).month;
+            document.querySelector("[name='edit_name']").value = item.name;
+            document.querySelector("[name='edit_from_year']").value = JSON.parse(item.from).year === 0 ? '' : JSON.parse(item.from).year ;
+            document.querySelector("[name='edit_from_month']").value = JSON.parse(item.from).month === 0 ? '' : JSON.parse(item.from).month;
+            document.querySelector("[name='edit_to_year']").value = JSON.parse(item.to).year === 0 ? '' : JSON.parse(item.to).year;
+            document.querySelector("[name='edit_to_month']").value = JSON.parse(item.to).month === 0 ? '' : JSON.parse(item.to).month;
         }
 
 
